@@ -8,7 +8,9 @@ const deleteBtn = document.querySelectorAll('.remove');
 const productQuantity = document.querySelectorAll('.number');
 const subtotalAmount = document.querySelector('.subtotal-amount');
 const totalAmount = document.querySelector('.total-amount');
-
+const delivery = document.querySelector('.shipping-amount').innerText.slice(1);
+const pricesArr = document.querySelectorAll('.cart-item-price');
+let total = 0;
 //logic for the remove button
 for (let i = 0; i < deleteBtn.length; i++){
     deleteBtn[i].addEventListener("click", (e)=>{
@@ -23,11 +25,16 @@ for(let i = 0; i < favBtn.length; i++){
         fav.classList.toggle('favorite-active');
     });
 }
+//parsing delivery amount into number
+
 //increment button function 
 for (let i = 0; i < incrementBtn.length; i++){
     incrementBtn[i].addEventListener("click", (e)=>{
         const quantity = e.target.nextElementSibling;
-            quantity. innerText = Number( e.target.nextElementSibling.innerText ) + 1;
+        quantity. innerText = Number( e.target.nextElementSibling.innerText ) + 1;
+        total = total + (Number(pricesArr[i].innerText.slice(1)));
+        subtotalAmount.innerText = `$ ${total}`;
+        totalAmount.innerText = `$ ${total + Number(delivery)}`;
     });
 }
 //decrement buttun function
@@ -36,6 +43,10 @@ for (let i = 0; i < decrementBtn.length; i++){
         const quantity = e.target.previousElementSibling;
         if(Number(quantity.innerText > 0)){
             quantity. innerText = Number( e.target.previousElementSibling.innerText ) -1;
+            total = total - Number(pricesArr[i].innerText.slice(1));
+            subtotalAmount.innerText = `$ ${total}`;
+
+            totalAmount.innerText = `$ ${total + Number(delivery)}`;
         }
     });
 }
