@@ -73,3 +73,10 @@ section {
   cursor: pointer;
 }
 
+.favorite-active{
+    color: red;
+    font-variation-settings: 
+        'FILL' 1,
+        'wght' 400
+}
+
